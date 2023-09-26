@@ -47,7 +47,7 @@ function Hero() {
                     <InstagramIcon />
                 </IconButton>
 
-                <IconButton aria-label="linkedin" sx={{ color: '#EEB411' }} size = "large" href="https://linkedin.com/in/jaimil-dalwadi" target="_blank">
+                <IconButton aria-label="linkedin" sx={{ color: '#EEB411' }} size = "large" href="https://www.linkedin.com/company/wat-street/" target="_blank">
                     <LinkedInIcon />
                 </IconButton>
                 
