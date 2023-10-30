@@ -13,7 +13,7 @@ function Hero() {
                 Wat Street
             </h1>
             <h4>
-                Waterloo's Quantitative Finance Design Team
+                Waterloo's Quantitative Finance Design Team - Testing
             </h4>
             
             <Stack direction="row" spacing={1} >
