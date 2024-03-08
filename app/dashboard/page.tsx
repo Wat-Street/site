@@ -2,6 +2,7 @@
 
 import Header from "@/components/dashboard/header"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import { CommandMenu } from "@/components/dashboard/commandDialog"
 import { useState } from "react"
 
 export default function DashboardPage() {
@@ -9,6 +10,7 @@ export default function DashboardPage() {
 
   return (
     <>
+      <CommandMenu open={stockSelectorOpen} setOpen={setStockSelectorOpen} />
       <div className="w-screen h-screen flex flex-col">
         <Header setOpen={setStockSelectorOpen} />
 
