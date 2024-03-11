@@ -36,7 +36,7 @@ export default function ModelParamsCard() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           {modelParamsFromApi.fields.map((data) => (
-            <AutoFormField form={form} data={data} />
+            <AutoFormField key={data.id} form={form} data={data} />
           ))}
           <Button type="submit">Submit</Button>
         </form>
