@@ -23,10 +23,9 @@ export default function Header() {
         open={stockSelectorOpen}
         setOpen={setStockSelectorOpen}
       />
-      <div className="flex w-screen items-center h-20 px-4 border-b border-border">
-        <div className="w-10 select-none z-0 h-10 mr-3 -translate-y-0.5">
+      <div className="flex z-50 w-screen items-center min-h-[5rem] h-20 px-4 border-b border-border">
+        <div className="w-10 select-none z-0 h-10 min-w-[2.5rem] mr-3 -translate-y-0.5">
           <Image src={Logo} alt="Wat Street Logo" className="w-full h-full" />
-          <div className="-z-10 w-full h-full absolute top-0 left-0 bg-brand blur-md opacity-30" />
         </div>
         <div className="text-xl font-semibold select-none">Backtesting</div>
         <div className="border-l border-border h-full flex items-center ml-6 px-6">
