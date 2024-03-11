@@ -1,18 +1,12 @@
-"use client"
-
 import Header from "@/components/dashboard/header"
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
-import { CommandMenu } from "@/components/dashboard/commandDialog"
-import { useState } from "react"
+import ModelParamsCard from "@/components/dashboard/modelParams"
+import { Card } from "@/components/ui/card"
 
 export default function DashboardPage() {
-  const [stockSelectorOpen, setStockSelectorOpen] = useState(false)
-
   return (
     <>
-      <CommandMenu open={stockSelectorOpen} setOpen={setStockSelectorOpen} />
       <div className="w-screen h-screen flex flex-col">
-        <Header setOpen={setStockSelectorOpen} />
+        <Header />
 
         <div className="w-full h-full p-4 grid gap-4 grid-cols-3 grid-rows-2">
           <Card className="row-span-1 col-span-1 w-full h-full"></Card>
