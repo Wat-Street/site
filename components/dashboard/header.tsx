@@ -41,11 +41,11 @@ export default function Header() {
           </Select>
           <Button
             variant="outline"
-            className="ml-4"
+            className="ml-4 !font-normal"
             onClick={() => setStockSelectorOpen(true)}
           >
             No Stock Selected{" "}
-            <span className="text-muted-foreground ml-4">⌘K</span>
+            <span className="text-muted-foreground font-semibold ml-4">⌘K</span>
           </Button>
           <Button variant="secondary" className="ml-4">
             Apply

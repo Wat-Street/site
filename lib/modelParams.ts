@@ -5,7 +5,7 @@ type Field = {
   id: string
   label: string
   desc?: string
-  type: "dateRange" | "number"
+  type: "dateRange" | "number" | "string"
 }
 
 export type ModelParamsResponse = {
@@ -40,28 +40,32 @@ export const modelParamsFromApi: ModelParamsResponse = {
 // ----------
 
 // this function maps the type from the API to the zod schema
-const mapTypeToZod = (type: "dateRange" | "number") => {
+const mapTypeToZod = (type: "dateRange" | "number" | "string") => {
   if (type === "dateRange") {
     return z.object({
       from: z.date(),
       to: z.date(),
     })
-  } else {
+  } else if (type === "number") {
     return z.string().refine((val) => !Number.isNaN(parseInt(val, 10)), {
       message: "Expected number, received a string",
     })
+  } else {
+    return z.string()
   }
 }
 
 // this function returns the default value for a given type
-export const getDefaultValue = (type: "dateRange" | "number") => {
+export const getDefaultValue = (type: "dateRange" | "number" | "string") => {
   if (type === "dateRange") {
     return {
       from: new Date(2022, 0, 20),
       to: addDays(new Date(2022, 0, 20), 20),
     }
-  } else {
+  } else if (type === "number") {
     return "10"
+  } else {
+    return ""
   }
 }
 

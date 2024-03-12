@@ -113,7 +113,7 @@ export default function AutoFormField({
               <FormLabel>{data.label}</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter hold time in days..."
+                  placeholder="Enter value..."
                   {...field}
                   value={field.value as string}
                 />
