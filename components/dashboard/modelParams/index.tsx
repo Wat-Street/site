@@ -14,6 +14,7 @@ import {
   modelParamsFromApi,
 } from "@/lib/modelParams"
 import AutoFormField from "./autoField"
+import { ArrowRight } from "lucide-react"
 
 export default function ModelParamsCard() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -32,13 +33,17 @@ export default function ModelParamsCard() {
 
   return (
     <Card className="row-span-1 col-span-1 w-full h-full p-4 overflow-y-auto">
-      <div className="text-xl font-semibold mb-4">Mean Reversion</div>
+      <div className="text-lg font-semibold mb-4">
+        {modelParamsFromApi.name}
+      </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           {modelParamsFromApi.fields.map((data) => (
             <AutoFormField key={data.id} form={form} data={data} />
           ))}
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className="w-full" variant="secondary">
+            Run Model <ArrowRight className="h-4 w-4 ml-2" />
+          </Button>
         </form>
       </Form>
     </Card>
