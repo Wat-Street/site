@@ -63,3 +63,18 @@
 html, body {
   overscroll-behavior: none;
 }
+
+.animate-graph{
+  stroke-dasharray: 100 4350;
+  stroke-dashoffset: 0;
+  animation: dash 5s infinite linear;
+}
+
+@keyframes dash {
+  from {
+      stroke-dashoffset: 0;
+  }
+  to {
+      stroke-dashoffset: 2000;
+  }
+}
