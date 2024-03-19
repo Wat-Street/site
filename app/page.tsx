@@ -9,11 +9,11 @@ export default function HomePage() {
                 <h1 className="text-6xl font-black tracking-widest">
                     WAT STREET
                 </h1>
-                <p className="pt-6 text-xl tracking-widest font-light">
+                <p className="pt-6 text-xl tracking-[0.15em] font-light">
                     UWaterloo's Quantitative Finance Team
                 </p>
             </div>
-            <div className="text-center mt-20 text-xl">Sponsors:</div>
+            <div className="text-center mt-16 text-xl">Sponsors:</div>
             <Image src={mef} alt="logo" width={200} className="mx-auto" />
         </main>
     );
