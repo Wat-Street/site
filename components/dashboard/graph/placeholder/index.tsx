@@ -26,9 +26,9 @@ export default function PlaceholderGraph() {
           y2="857"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" stop-opacity="0.1" />
-          <stop offset="0.65" stop-color="white" stop-opacity="0.01" />
-          <stop offset="0.82" stop-color="white" stop-opacity="0" />
+          <stop stopColor="white" stopOpacity="0.1" />
+          <stop offset="0.65" stopColor="white" stopOpacity="0.01" />
+          <stop offset="0.82" stopColor="white" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>
