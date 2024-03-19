@@ -18,10 +18,10 @@ const Navbar = () => {
     };
 
     return (
-        <div className="border-b-[1px] border-[#262626] w-full h-16 px-16 grid grid-cols-3 items-center">
+        <div className="border-b-[1px] border-[#262626] w-full h-20 px-16 grid grid-cols-3 items-center fixed">
             <Image src={logo} alt="logo" width={50} height={50} />
             <div className="justify-self-center">
-                <ul className="flex">
+                {/* <ul className="flex">
                     {navLinks.map((item, key) => {
                         return (
                             <li
@@ -41,13 +41,13 @@ const Navbar = () => {
                             </li>
                         );
                     })}
-                </ul>
+                </ul> */}
             </div>
             <div className="justify-self-end">
                 <ul className="flex">
                     <li className="pr-10">
                         <a
-                            href="https://github.com/notAkki"
+                            href="mailto:watstreetwaterloo@gmail.com"
                             target="_blank"
                             rel="noreferrer noopener"
                         >
@@ -63,7 +63,7 @@ const Navbar = () => {
                     </li>
                     <li className="pr-10">
                         <a
-                            href="https://github.com/notAkki"
+                            href="https://instagram.com/wat.street/"
                             target="_blank"
                             rel="noreferrer noopener"
                         >
@@ -79,7 +79,7 @@ const Navbar = () => {
                     </li>
                     <li className="pr-0">
                         <a
-                            href="https://github.com/notAkki"
+                            href="https://www.linkedin.com/company/wat-street/"
                             target="_blank"
                             rel="noreferrer noopener"
                         >
