@@ -5,7 +5,7 @@ import PlaceholderGraph, { PlaceholderGraphLine } from "./placeholder"
 import { useEffect, useRef, useState } from "react"
 import { Loader2 } from "lucide-react"
 import TestGraph from "./testGraph"
-import { MarketData } from "./types"
+import { TMarketData } from "./types"
 
 export default function GraphCard() {
   const [isLoading, setIsLoading] = useState(true)
@@ -14,7 +14,7 @@ export default function GraphCard() {
   const cardRef = useRef<HTMLDivElement>(null)
 
   // TEST API CALL:
-  const [data, setData] = useState<MarketData | null>(null)
+  const [data, setData] = useState<TMarketData | null>(null)
 
   useEffect(() => {
     async function fetchData() {
@@ -23,7 +23,7 @@ export default function GraphCard() {
         "https://api.polygon.io/v2/aggs/ticker/AAPL/range/10/minute/2024-03-19/2024-03-19?adjusted=true&sort=asc&apiKey=nJ70HN6T9nOPnfApFyAeIDxL_4CUocsv"
       )
       const data = await res.json()
-      setData(data as MarketData)
+      setData(data as TMarketData)
       setIsLoading(false)
       setEnable(true)
     }
@@ -48,7 +48,7 @@ export default function GraphCard() {
             outliers: [],
           }))}
           width={cardRef.current.clientWidth}
-          height={cardRef.current.clientHeight - 40}
+          height={cardRef.current.clientHeight}
         />
       ) : (
         <>

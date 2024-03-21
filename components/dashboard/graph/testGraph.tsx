@@ -1,29 +1,23 @@
 import React, { useState } from "react"
 import { Group } from "@visx/group"
 import { BoxPlot } from "@visx/stats"
-import { scaleBand, scaleLinear } from "@visx/scale"
-import genStats, {
-  Stats,
-  BoxPlot as BoxPlotType,
-} from "@visx/mock-data/lib/generators/genStats"
-import { getSeededRandom, getRandomNormal } from "@visx/mock-data"
-import { Tooltip, defaultStyles as defaultTooltipStyles } from "@visx/tooltip"
-import { AxisBottom } from "@visx/axis"
-import { useTooltip } from "@visx/tooltip"
-import { StatsData } from "./types"
+import { scaleTime, scaleBand, scaleLinear } from "@visx/scale"
+import { AxisBottom, AxisRight } from "@visx/axis"
+import { TBoxPlot } from "./types"
 
 // // seeded randomness
 // const seededRandom = getSeededRandom(0.1)
 // const randomNormal = getRandomNormal.source(getSeededRandom(0.789))(4, 3)
-// const data: BoxPlotType[] = genStats(15, randomNormal, () => 10 * seededRandom())
+// const data: TBoxPlot[] = genStats(15, randomNormal, () => 10 * seededRandom())
 
 // accessors
-const x = (d: BoxPlotType) => new Date(parseInt(d.x)).toLocaleTimeString()
-const min = (d: BoxPlotType) => d.min
-const max = (d: BoxPlotType) => d.max
-const median = (d: BoxPlotType) => d.median
-const firstQuartile = (d: BoxPlotType) => d.firstQuartile
-const thirdQuartile = (d: BoxPlotType) => d.thirdQuartile
+// const x = (d: TBoxPlot) => parseInt(d.x)
+const x = (d: TBoxPlot) => new Date(parseInt(d.x))
+const min = (d: TBoxPlot) => d.min
+const max = (d: TBoxPlot) => d.max
+const median = (d: TBoxPlot) => d.median
+const firstQuartile = (d: TBoxPlot) => d.firstQuartile
+const thirdQuartile = (d: TBoxPlot) => d.thirdQuartile
 
 interface TooltipData {
   name: string
@@ -41,30 +35,20 @@ export default function TestGraph({
 }: {
   width: number
   height: number
-  data: BoxPlotType[]
+  data: TBoxPlot[]
 }) {
-  // const {
-  //   tooltipOpen,
-  //   tooltipLeft,
-  //   tooltipTop,
-  //   tooltipData,
-  //   hideTooltip,
-  //   showTooltip,
-  // } = useTooltip<TooltipData>()
-
   const [tooltipData, setTooltipData] = useState<TooltipData | null>(null)
-  const [hoveredBar, setHoveredBar] = useState(-1)
 
-  // bounds
-  const xMax = width
-  const yMax = height - 120
+  // const xScale = scaleTime<number>({
+  //   range: [0, width - 48],
+  //   domain: [parseInt(data[0].x), parseInt(data[data.length - 1].x)],
+  // })
 
-  // scales
-  const xScale = scaleBand<string>({
-    range: [0, xMax],
+  const xScale = scaleBand<number>({
+    range: [0, width - 48],
     round: true,
-    domain: data.map(x),
-    padding: 0,
+    domain: data.map((d) => x(d).getTime()),
+    padding: 0.4,
   })
 
   const values = data.reduce((allValues, boxPlot) => {
@@ -75,18 +59,19 @@ export default function TestGraph({
   const maxYValue = Math.max(...values)
 
   const yScale = scaleLinear<number>({
-    range: [yMax, 0],
+    range: [height - 48, 0],
     round: true,
     domain: [minYValue, maxYValue],
+    nice: 100,
   })
 
-  const boxWidth = xScale.bandwidth()
-  const constrainedWidth = Math.min(40, boxWidth)
+  const boxWidth = width / data.length
+  // const constrainedWidth = Math.min(40, boxWidth)
+  const constrainedWidth = boxWidth
 
-  return width < 10 ? null : (
+  return (
     <div className="relative h-full cursor-crosshair">
       <svg width={width} height={height}>
-        {/* <LinearGradient id="statsplot" to="#8b6ce7" from="#87f2d4" /> */}
         <rect
           x={0}
           y={0}
@@ -95,96 +80,112 @@ export default function TestGraph({
           fill="url(#statsplot)"
           rx={14}
         />
-        <Group top={40}>
-          {data.map((d: BoxPlotType, i) => (
-            <g key={i}>
-              <BoxPlot
-                min={min(d)}
-                max={max(d)}
-                left={xScale(x(d))! + 0.3 * constrainedWidth}
-                firstQuartile={firstQuartile(d)}
-                thirdQuartile={thirdQuartile(d)}
-                median={median(d)}
-                boxWidth={constrainedWidth * 0.4}
-                fill={firstQuartile(d) === median(d) ? "#06B061" : "#FF2F30"}
-                fillOpacity={hoveredBar === i ? 0.5 : 1}
-                stroke={firstQuartile(d) === median(d) ? "#06B061" : "#FF2F30"}
-                strokeWidth={1}
-                valueScale={yScale}
-                minProps={{
-                  onMouseOver: () => {
-                    setHoveredBar(i)
-                    setTooltipData({
-                      min: min(d),
-                      name: x(d),
-                      max: max(d),
-                      firstQuartile: firstQuartile(d),
-                      median: median(d),
-                      thirdQuartile: thirdQuartile(d),
-                    })
-                  },
-                }}
-                maxProps={{
-                  onMouseOver: () => {
-                    setHoveredBar(i)
-                    setTooltipData({
-                      min: min(d),
-                      name: x(d),
-                      max: max(d),
-                      firstQuartile: firstQuartile(d),
-                      median: median(d),
-                      thirdQuartile: thirdQuartile(d),
-                    })
-                  },
-                }}
-                boxProps={{
-                  onMouseOver: () => {
-                    setHoveredBar(i)
-                    setTooltipData({
-                      min: min(d),
-                      name: x(d),
-                      max: max(d),
-                      firstQuartile: firstQuartile(d),
-                      median: median(d),
-                      thirdQuartile: thirdQuartile(d),
-                    })
-                  },
-                }}
-                medianProps={{
-                  style: {
-                    stroke: "white",
-                  },
-                  onMouseOver: () => {
-                    setHoveredBar(i)
-                    setTooltipData({
-                      min: min(d),
-                      name: x(d),
-                      max: max(d),
-                      firstQuartile: firstQuartile(d),
-                      median: median(d),
-                      thirdQuartile: thirdQuartile(d),
-                    })
-                  },
-                }}
-              />
-            </g>
-          ))}
-        </Group>
+        {data.map((d: TBoxPlot, i) => (
+          <g key={i}>
+            <BoxPlot
+              min={min(d)}
+              max={max(d)}
+              left={xScale(x(d).getTime())! + 0.3 * constrainedWidth}
+              // left={xScale(x(d))! + 0.3 * constrainedWidth}
+              firstQuartile={firstQuartile(d)}
+              thirdQuartile={thirdQuartile(d)}
+              median={median(d)}
+              boxWidth={constrainedWidth * 0.4}
+              fill={firstQuartile(d) === median(d) ? "#26ab6d" : "#d93637"}
+              fillOpacity={1}
+              stroke={firstQuartile(d) === median(d) ? "#26ab6d" : "#d93637"}
+              strokeWidth={1}
+              valueScale={yScale}
+              minProps={{
+                onMouseOver: () => {
+                  setTooltipData({
+                    min: min(d),
+                    name: new Date(x(d)).toLocaleTimeString(),
+                    // name: x(d),
+                    max: max(d),
+                    firstQuartile: firstQuartile(d),
+                    median: median(d),
+                    thirdQuartile: thirdQuartile(d),
+                  })
+                },
+              }}
+              maxProps={{
+                onMouseOver: () => {
+                  setTooltipData({
+                    min: min(d),
+                    name: new Date(x(d)).toLocaleTimeString(),
+                    // name: x(d),
+                    max: max(d),
+                    firstQuartile: firstQuartile(d),
+                    median: median(d),
+                    thirdQuartile: thirdQuartile(d),
+                  })
+                },
+              }}
+              boxProps={{
+                onMouseOver: () => {
+                  setTooltipData({
+                    min: min(d),
+                    name: new Date(x(d)).toLocaleTimeString(),
+                    // name: x(d),
+                    max: max(d),
+                    firstQuartile: firstQuartile(d),
+                    median: median(d),
+                    thirdQuartile: thirdQuartile(d),
+                  })
+                },
+              }}
+              medianProps={{
+                style: {
+                  stroke: "white",
+                },
+                onMouseOver: () => {
+                  setTooltipData({
+                    min: min(d),
+                    name: new Date(x(d)).toLocaleTimeString(),
+                    // name: x(d),
+                    max: max(d),
+                    firstQuartile: firstQuartile(d),
+                    median: median(d),
+                    thirdQuartile: thirdQuartile(d),
+                  })
+                },
+              }}
+            />
+          </g>
+        ))}
 
         <AxisBottom
-          top={height}
+          top={height - 48}
           scale={xScale}
-          // tickFormat={formatDate}
-          stroke={"#ff0000"}
-          tickStroke={"#ff0000"}
+          stroke={"#fff"}
+          tickStroke={"#fff"}
+          tickFormat={(value) => {
+            // const split = (value as Date).toLocaleTimeString().split(":")
+            const split = new Date(value).toLocaleTimeString().split(":")
+            return split[0] + ":" + split[1] + " " + split[2].split(" ")[1]
+          }}
           tickLabelProps={{
-            fill: "#ff0000",
+            fill: "#fff",
             fontSize: 11,
             textAnchor: "middle",
           }}
         />
-      </svg>
 
+        <AxisRight
+          left={width - 48}
+          scale={yScale}
+          stroke={"#fff"}
+          tickStroke={"#fff"}
+          tickLabelProps={{
+            fill: "#fff",
+            color: "#fff",
+            fontSize: 11,
+            textAnchor: "middle",
+            dx: 16,
+          }}
+        />
+      </svg>
       {tooltipData && (
         <div className="p-2 top-2 left-2 absolute text-white rounded-lg shadow-sm border bg-neutral-950">
           <div className="text-xs font-semibold">{tooltipData.name}</div>

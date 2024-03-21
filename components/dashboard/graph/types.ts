@@ -1,4 +1,4 @@
-export type MarketData = {
+export type TMarketData = {
   ticket: string
   queryCount: number
   resultsCount: number
@@ -18,12 +18,11 @@ export type MarketData = {
   }[]
 }
 
-export type StatsData = {
+export type TBoxPlot = {
   x: string
   min: number
   firstQuartile: number
   median: number
   thirdQuartile: number
   max: number
-  outliers: number[]
-}[]
+}
