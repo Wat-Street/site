@@ -33,6 +33,7 @@ interface TooltipData {
 
 const getDate = (d: TBoxPlot) => new Date(parseInt(d.x))
 const bisectDate = bisector<TooltipData, Date>((d) => getDate(d)).left
+const margin = 48
 
 export default function TestGraph({
   width,
@@ -43,18 +44,11 @@ export default function TestGraph({
   height: number
   data: TBoxPlot[]
 }) {
-  // const [tooltipData, setTooltipData] = useState<TooltipData | null>(null)
-  const {
-    tooltipOpen,
-    tooltipLeft,
-    tooltipTop,
-    tooltipData,
-    hideTooltip,
-    showTooltip,
-  } = useTooltip<TooltipData>()
+  const { tooltipLeft, tooltipTop, tooltipData, hideTooltip, showTooltip } =
+    useTooltip<TooltipData>()
 
   const xScale = scaleBand<number>({
-    range: [0, width - 48],
+    range: [0, width - margin],
     // round: true,
     domain: data.map((d) => x(d).getTime()),
     paddingOuter: 2,
@@ -68,7 +62,7 @@ export default function TestGraph({
   const maxYValue = Math.max(...values)
 
   const yScale = scaleLinear<number>({
-    range: [height - 48, 0],
+    range: [height - margin, 0],
     round: true,
     domain: [minYValue, maxYValue],
     nice: 100,
@@ -103,7 +97,10 @@ export default function TestGraph({
       }
       showTooltip({
         tooltipData: d,
-        tooltipLeft: x,
+        tooltipLeft:
+          xScale.paddingOuter() * xScale.bandwidth() +
+          xIndex * eachBand +
+          eachBand / 2,
         tooltipTop: yScale(
           d.firstQuartile == d.median ? d.thirdQuartile : d.firstQuartile
         ),
@@ -114,6 +111,8 @@ export default function TestGraph({
 
   return (
     <div className="relative h-full cursor-crosshair">
+      {/* <div className="absolute right-0">
+      </div> */}
       <svg width={width} height={height}>
         <rect
           x={0}
@@ -138,54 +137,6 @@ export default function TestGraph({
               stroke={firstQuartile(d) === median(d) ? "#26ab6d" : "#d93637"}
               strokeWidth={1}
               valueScale={yScale}
-              // minProps={{
-              //   onMouseOver: () => {
-              //     setTooltipData({
-              //       min: min(d),
-              //       name: new Date(x(d)).toLocaleTimeString(),
-              //       max: max(d),
-              //       firstQuartile: firstQuartile(d),
-              //       median: median(d),
-              //       thirdQuartile: thirdQuartile(d),
-              //     })
-              //   },
-              // }}
-              // maxProps={{
-              //   onMouseOver: () => {
-              //     setTooltipData({
-              //       min: min(d),
-              //       name: new Date(x(d)).toLocaleTimeString(),
-              //       max: max(d),
-              //       firstQuartile: firstQuartile(d),
-              //       median: median(d),
-              //       thirdQuartile: thirdQuartile(d),
-              //     })
-              //   },
-              // }}
-              // boxProps={{
-              //   onMouseOver: () => {
-              //     setTooltipData({
-              //       min: min(d),
-              //       name: new Date(x(d)).toLocaleTimeString(),
-              //       max: max(d),
-              //       firstQuartile: firstQuartile(d),
-              //       median: median(d),
-              //       thirdQuartile: thirdQuartile(d),
-              //     })
-              //   },
-              // }}
-              // medianProps={{
-              //   onMouseOver: () => {
-              //     setTooltipData({
-              //       min: min(d),
-              //       name: new Date(x(d)).toLocaleTimeString(),
-              //       max: max(d),
-              //       firstQuartile: firstQuartile(d),
-              //       median: median(d),
-              //       thirdQuartile: thirdQuartile(d),
-              //     })
-              //   },
-              // }}
             />
             <Bar
               x={0}
@@ -203,12 +154,11 @@ export default function TestGraph({
         ))}
 
         <AxisBottom
-          top={height - 48}
+          top={height - margin}
           scale={xScale}
           stroke={"#fff"}
           tickStroke={"#fff"}
           tickFormat={(value) => {
-            // const split = (value as Date).toLocaleTimeString().split(":")
             const split = new Date(value).toLocaleTimeString().split(":")
             return split[0] + ":" + split[1] + " " + split[2].split(" ")[1]
           }}
@@ -220,10 +170,11 @@ export default function TestGraph({
         />
 
         <AxisRight
-          left={width - 48}
+          left={width - margin}
           scale={yScale}
           stroke={"#fff"}
           tickStroke={"#fff"}
+          tickFormat={(value) => `${value.valueOf().toFixed(2)}`}
           tickLabelProps={{
             fill: "#fff",
             color: "#fff",
@@ -236,41 +187,66 @@ export default function TestGraph({
           <g>
             <Line
               from={{ x: 0, y: tooltipTop }}
-              to={{ y: tooltipTop, x: innerWidth - 164 }}
+              to={{ x: width - margin, y: tooltipTop }}
               stroke={"#fff"}
-              strokeOpacity={0.25}
+              strokeOpacity={0.2}
               strokeWidth={1}
               pointerEvents="none"
-              strokeDasharray="5,2"
+              // strokeDasharray="5,2"
             />
             <Line
               from={{ x: tooltipLeft, y: 0 }}
-              to={{ x: tooltipLeft, y: innerHeight - 164 }}
+              to={{ x: tooltipLeft, y: height - margin }}
               stroke={"#fff"}
-              strokeOpacity={0.25}
+              strokeOpacity={0.2}
               strokeWidth={1}
               pointerEvents="none"
-              strokeDasharray="5,2"
+              // strokeDasharray="5,2"
             />
           </g>
         )}
       </svg>
       {tooltipData && (
-        <div className="p-2 top-2 left-2 absolute text-white rounded-lg shadow-sm border bg-neutral-950">
-          <div className="text-xs font-semibold">
+        <>
+          <div
+            style={{
+              top: height - margin + 4,
+              left: tooltipLeft,
+            }}
+            className="p-1 text-xs font-semibold -translate-x-1/2 absolute text-foreground rounded-lg shadow-sm border bg-card"
+          >
             {new Date(parseInt(tooltipData.x)).toLocaleTimeString()}
           </div>
-          <div className="text-xs text-muted-foreground">
-            {tooltipData.median && <div>Open: {tooltipData.median}</div>}
-            {tooltipData.max && <div>High: {tooltipData.max}</div>}
-            {tooltipData.min && <div>Low: {tooltipData.min}</div>}
-            {tooltipData.thirdQuartile > tooltipData.median ? (
-              <div>Close: {tooltipData.thirdQuartile}</div>
-            ) : (
-              <div>Close: {tooltipData.firstQuartile}</div>
-            )}
+          <div
+            style={{
+              top: tooltipTop,
+              left: width - margin,
+            }}
+            className="p-1 text-xs font-semibold -translate-y-1/2 absolute text-foreground rounded-lg shadow-sm border bg-card"
+          >
+            {tooltipData.firstQuartile === tooltipData.median
+              ? tooltipData.thirdQuartile.toFixed(2)
+              : tooltipData.firstQuartile.toFixed(2)}
           </div>
-        </div>
+
+          <div className="p-2 text-xs top-2 left-2 absolute text-foreground rounded-lg shadow-sm border bg-card">
+            <div className="font-semibold">
+              {new Date(parseInt(tooltipData.x)).toLocaleTimeString()}
+            </div>
+            <div className="text-muted-foreground">
+              {tooltipData.median && (
+                <div>Open: {tooltipData.median.toFixed(2)}</div>
+              )}
+              {tooltipData.max && <div>High: {tooltipData.max.toFixed(2)}</div>}
+              {tooltipData.min && <div>Low: {tooltipData.min.toFixed(2)}</div>}
+              {tooltipData.thirdQuartile > tooltipData.median ? (
+                <div>Close: {tooltipData.thirdQuartile.toFixed(2)}</div>
+              ) : (
+                <div>Close: {tooltipData.firstQuartile.toFixed(2)}</div>
+              )}
+            </div>
+          </div>
+        </>
       )}
     </div>
   )
