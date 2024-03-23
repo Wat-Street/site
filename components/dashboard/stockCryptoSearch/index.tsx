@@ -11,6 +11,18 @@ import {
 } from "@/components/ui/command"
 import { Loader2, X } from "lucide-react"
 
+interface ItemStockProps {
+  ticker: string;
+  name: string;
+  primaryExchange: string;
+}
+
+interface ItemCryptoProps {
+  ticker: string;
+  name: string;
+  currencySymbol: string;
+}
+
 export default function StockCryptoSearch({
   open,
   setOpen,
@@ -35,11 +47,11 @@ export default function StockCryptoSearch({
     const delayDebounceFn = setTimeout(() => {
       if (search) {
         console.log("searching for: " + search)
+        handleSearch();
       } else {
         console.log("search cleared")
       }
     }, 300)
-
     return () => clearTimeout(delayDebounceFn)
   }, [search])
 
@@ -49,7 +61,53 @@ export default function StockCryptoSearch({
     off: "border-border text-muted-foreground focus-visible:ring-ring",
   }
 
-  console.log("hello world")
+  // State for getting the top 5 results of the search
+  const [topFiveStockResults, setTopFiveStockResults] = useState<ItemStockProps[]>([]);
+  const [topFiveCryptoResults, setTopFiveCryptopResults] = useState<ItemCryptoProps[]>([]);
+
+  // Handle search function --> runs every 300ms as according to useEffect above
+  const handleSearch = async () => {
+    if (isStock) {
+      try {
+        const response = await fetch(`https://api.polygon.io/v3/reference/tickers?market=stocks&search=${search}&active=true&limit=5&apiKey=nJ70HN6T9nOPnfApFyAeIDxL_4CUocsv`);
+        const data = await response.json();
+        console.log(data);
+
+        const topMatches = data.results.map((result: any) => ({
+          ticker: result.ticker,
+          name: result.name,
+          primaryExchange: result.primary_exchange,
+        }));
+
+        setTopFiveStockResults(topMatches);
+
+      } catch (error) {
+          console.error(error + "The request to get data did not go through");
+      }
+    }
+
+    else if (!isStock) {
+      try {
+        console.log("not stock version")
+        const response = await fetch(`https://api.polygon.io/v3/reference/tickers?market=crypto&search=${search}&active=true&apiKey=nJ70HN6T9nOPnfApFyAeIDxL_4CUocsv
+        `);
+        const data = await response.json();
+        console.log(data);
+
+        const topMatches = data.results.map((result: any) => ({
+          ticker: result.ticker,
+          name: result.name,
+          currencySymbol: result.currency_symbol,
+        }))
+
+        setTopFiveCryptopResults(topMatches);
+
+      } catch (error) {
+          console.error(error + "The request to data did not go through");
+      }
+    }
+
+  }
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
@@ -79,11 +137,16 @@ export default function StockCryptoSearch({
       />
       <CommandList>
         <div className="overflow-hidden p-2 text-foreground">
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
+
+          {isStock 
+          ? 
+          topFiveStockResults.map((result, index) => (
+            <StockItem key={index} ticker={result.ticker} name={result.name} primaryExchange={result.primaryExchange}/>
+          )) 
+          : 
+          topFiveCryptoResults.map((result, index) => (
+            <CryptoItem key={index} ticker={result.ticker} name={result.name} currencySymbol={result.currencySymbol}/>
+          ))}
 
           {/* <div className="flex w-full justify-center text-muted-foreground items-center text-sm py-2">
             <Loader2 className="animate-spin h-4 w-4 mr-2 text-brand" />{" "}
@@ -99,16 +162,33 @@ export default function StockCryptoSearch({
   )
 }
 
-function Item() {
+
+
+const StockItem: React.FC<ItemStockProps> = ({ ticker, name, primaryExchange }) => {
   return (
     <button className="relative w-full flex justify-between cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring">
       <div className="font-semibold">
-        AAPL{" "}
+        {ticker}{" "}
         <span className="text-muted-foreground font-normal inline-block ml-1">
-          Apple Inc.
+          {name}
         </span>
       </div>
-      <div className="text-muted-foreground">Nasdaq (USD)</div>
+      <div className="text-muted-foreground">{primaryExchange}</div>
     </button>
   )
 }
+
+const CryptoItem: React.FC<ItemCryptoProps> = ({ ticker, name, currencySymbol }) => {
+  return (
+    <button className="relative w-full flex justify-between cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring">
+      <div className="font-semibold">
+        {ticker}{" "}
+        <span className="text-muted-foreground font-normal inline-block ml-1">
+          {name}
+        </span>
+      </div>
+      <div className="text-muted-foreground">{currencySymbol}</div>
+    </button>
+  )
+}
+
