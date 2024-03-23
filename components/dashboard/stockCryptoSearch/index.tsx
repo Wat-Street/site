@@ -89,8 +89,7 @@ export default function StockCryptoSearch({
     else if (!isStock) {
       try {
         console.log("not stock version")
-        const response = await fetch(`https://api.polygon.io/v3/reference/tickers?market=crypto&search=${search}&active=true&apiKey=nJ70HN6T9nOPnfApFyAeIDxL_4CUocsv
-        `);
+        const response = await fetch(`https://api.polygon.io/v3/reference/tickers?market=crypto&search=${search}&active=true&apiKey=nJ70HN6T9nOPnfApFyAeIDxL_4CUocsv`);
         const data = await response.json();
         console.log(data);
 
