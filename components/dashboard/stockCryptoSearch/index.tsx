@@ -49,6 +49,8 @@ export default function StockCryptoSearch({
     off: "border-border text-muted-foreground focus-visible:ring-ring",
   }
 
+  console.log("hello world")
+
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
       <div className="pt-3 px-3 space-x-2 flex">
