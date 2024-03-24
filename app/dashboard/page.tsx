@@ -1,4 +1,4 @@
-import GraphCard from "@/components/dashboard/graph"
+import GraphCard from "@/components/dashboard/display"
 import Header from "@/components/dashboard/header"
 import ModelParamsCard from "@/components/dashboard/modelParams"
 import { Card } from "@/components/ui/card"

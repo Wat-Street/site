@@ -2,8 +2,8 @@
 
 import PlaceholderGraphic from "./placeholder"
 import { useEffect, useRef, useState } from "react"
-import TestGraph from "./testGraph"
-import { TMarketData } from "./types"
+import Chart from "./chart"
+import { TMarketData } from "@/lib/chart"
 
 export default function GraphCard() {
   const [isLoading, setIsLoading] = useState(false)
@@ -41,9 +41,9 @@ export default function GraphCard() {
       className="2xl:col-span-3 overflow-hidden col-span-2 row-span-2 w-full h-full relative z-0 flex items-center justify-center"
     >
       {enable && cardRef.current && data ? (
-        <TestGraph
+        <Chart
           data={data.results.map((d) => ({
-            x: d.t.toString(),
+            time: d.t.toString(),
             min: d.l,
             max: d.h,
             median: d.o,
