@@ -15,13 +15,14 @@ interface ItemStockProps {
   ticker: string;
   name: string;
   primaryExchange: string;
-  setOpen: any;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 interface ItemCryptoProps {
   ticker: string;
   name: string;
   currencySymbol: string;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function StockCryptoSearch({
@@ -146,7 +147,7 @@ export default function StockCryptoSearch({
           )) 
           : 
           topFiveCryptoResults.map((result, index) => (
-            <CryptoItem key={index} ticker={result.ticker} name={result.name} currencySymbol={result.currencySymbol}/>
+            <CryptoItem key={index} ticker={result.ticker} name={result.name} currencySymbol={result.currencySymbol} setOpen={setOpen}/>
           ))}
 
           {/* <div className="flex w-full justify-center text-muted-foreground items-center text-sm py-2">
@@ -187,9 +188,16 @@ const StockItem: React.FC<ItemStockProps> = ({ ticker, name, primaryExchange, se
   )
 }
 
-const CryptoItem: React.FC<ItemCryptoProps> = ({ ticker, name, currencySymbol }) => {
+const CryptoItem: React.FC<ItemCryptoProps> = ({ ticker, name, currencySymbol, setOpen }) => {
+  const handleChoice = (ticker: string) => {
+    console.log(ticker);
+    setOpen(false);
+  }
+
   return (
-    <button className="relative w-full flex justify-between cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring">
+    <button className="relative w-full flex justify-between cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring"
+            onClick={() => handleChoice(ticker)}
+    >
       <div className="font-semibold">
         {ticker}{" "}
         <span className="text-muted-foreground font-normal inline-block ml-1">
