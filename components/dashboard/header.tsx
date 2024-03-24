@@ -16,12 +16,14 @@ import StockCryptoSearch from "./stockCryptoSearch"
 
 export default function Header() {
   const [stockSelectorOpen, setStockSelectorOpen] = useState(false)
+  const [selectedItem, setSelectedItem] = useState("No Stock Selected");
 
   return (
     <>
       <StockCryptoSearch
         open={stockSelectorOpen}
         setOpen={setStockSelectorOpen}
+        setSelectedItem={setSelectedItem}
       />
       <div className="flex z-50 w-screen items-center min-h-[5rem] h-20 px-4 border-b border-border">
         <div className="w-10 select-none z-0 h-10 min-w-[2.5rem] mr-3 -translate-y-0.5">
@@ -44,7 +46,7 @@ export default function Header() {
             className="ml-4 !font-normal"
             onClick={() => setStockSelectorOpen(true)}
           >
-            No Stock Selected{" "}
+            {selectedItem}{" "}
             <span className="text-muted-foreground font-semibold ml-4">⌘K</span>
           </Button>
           <Button variant="secondary" className="ml-4">

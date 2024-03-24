@@ -16,6 +16,7 @@ interface ItemStockProps {
   name: string;
   primaryExchange: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  setSelectedItem: Dispatch<SetStateAction<string>>
 }
 
 interface ItemCryptoProps {
@@ -23,14 +24,17 @@ interface ItemCryptoProps {
   name: string;
   currencySymbol: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  setSelectedItem: Dispatch<SetStateAction<string>>
 }
 
 export default function StockCryptoSearch({
   open,
   setOpen,
+  setSelectedItem,
 }: {
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
+  setSelectedItem: Dispatch<SetStateAction<string>>
 }) {
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -143,11 +147,11 @@ export default function StockCryptoSearch({
           {isStock 
           ? 
           topFiveStockResults.map((result, index) => (
-            <StockItem key={index} ticker={result.ticker} name={result.name} primaryExchange={result.primaryExchange} setOpen={setOpen}/>
+            <StockItem key={index} ticker={result.ticker} name={result.name} primaryExchange={result.primaryExchange} setOpen={setOpen} setSelectedItem={setSelectedItem}/>
           )) 
           : 
           topFiveCryptoResults.map((result, index) => (
-            <CryptoItem key={index} ticker={result.ticker} name={result.name} currencySymbol={result.currencySymbol} setOpen={setOpen}/>
+            <CryptoItem key={index} ticker={result.ticker} name={result.name} currencySymbol={result.currencySymbol} setOpen={setOpen} setSelectedItem={setSelectedItem}/>
           ))}
 
           {/* <div className="flex w-full justify-center text-muted-foreground items-center text-sm py-2">
@@ -166,10 +170,10 @@ export default function StockCryptoSearch({
 
 
 
-const StockItem: React.FC<ItemStockProps> = ({ ticker, name, primaryExchange, setOpen }) => {
+const StockItem: React.FC<ItemStockProps> = ({ ticker, name, primaryExchange, setOpen, setSelectedItem }) => {
 
   const handleChoice = (ticker: string) => {
-    console.log(ticker);
+    setSelectedItem(ticker);
     setOpen(false);
   }
 
@@ -188,9 +192,9 @@ const StockItem: React.FC<ItemStockProps> = ({ ticker, name, primaryExchange, se
   )
 }
 
-const CryptoItem: React.FC<ItemCryptoProps> = ({ ticker, name, currencySymbol, setOpen }) => {
+const CryptoItem: React.FC<ItemCryptoProps> = ({ ticker, name, currencySymbol, setOpen, setSelectedItem }) => {
   const handleChoice = (ticker: string) => {
-    console.log(ticker);
+    setSelectedItem(ticker);
     setOpen(false);
   }
 
