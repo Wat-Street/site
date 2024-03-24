@@ -10,7 +10,7 @@ export default function PlaceholderGraphic({
   isLoading: boolean
 }) {
   return (
-    <div className="w-full h-full z-0 flex items-center justify-center">
+    <>
       <div className="absolute z-10 bg-gradient-to-l from-background to-transparent h-full w-16 sm:w-32 md:w-48 right-0" />
       <div className="absolute z-10 bg-gradient-to-r from-background to-transparent h-full w-16 sm:w-32 md:w-48 left-0" />
       <div className="absolute flex items-center text-lg z-10 select-none font-semibold">
@@ -30,6 +30,6 @@ export default function PlaceholderGraphic({
         </>
       ) : null}
       <PlaceholderGraph />
-    </div>
+    </>
   )
 }
