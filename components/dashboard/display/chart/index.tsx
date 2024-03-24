@@ -54,10 +54,12 @@ export default function ChartComponent({
       const outerGap = xScale.paddingOuter() * xScale.bandwidth()
 
       // constrainedX is necessary to account for the band scale outer padding
-      const constrainedX = Math.min(
-        Math.max(0, x - outerGap),
-        width - margin - 2 * outerGap
-      )
+      if (x < outerGap || x > width - margin - outerGap) {
+        hideTooltip()
+        return
+      }
+
+      const constrainedX = x - outerGap
 
       // find the closest data point
       const xIndex = Math.floor(constrainedX / xScale.step())
