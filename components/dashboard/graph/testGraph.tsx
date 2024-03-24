@@ -6,7 +6,7 @@ import { AxisBottom, AxisRight } from "@visx/axis"
 import { TBoxPlot } from "./types"
 import { useTooltip, defaultStyles } from "@visx/tooltip"
 import { localPoint } from "@visx/event"
-import { max as visxMax, extent, bisector } from "@visx/vendor/d3-array"
+import { bisector } from "@visx/vendor/d3-array"
 
 // // seeded randomness
 // const seededRandom = getSeededRandom(0.1)
@@ -111,8 +111,7 @@ export default function TestGraph({
 
   return (
     <div className="relative h-full cursor-crosshair">
-      {/* <div className="absolute right-0">
-      </div> */}
+      <div className="absolute font-mono right-0"></div>
       <svg width={width} height={height}>
         <rect
           x={0}
@@ -156,31 +155,32 @@ export default function TestGraph({
         <AxisBottom
           top={height - margin}
           scale={xScale}
-          stroke={"#fff"}
-          tickStroke={"#fff"}
+          stroke={"#737373"}
+          tickStroke={"#737373"}
           tickFormat={(value) => {
             const split = new Date(value).toLocaleTimeString().split(":")
             return split[0] + ":" + split[1] + " " + split[2].split(" ")[1]
           }}
           tickLabelProps={{
-            fill: "#fff",
+            fill: "#737373",
             fontSize: 11,
             textAnchor: "middle",
+            fontFamily: "inherit",
           }}
         />
 
         <AxisRight
           left={width - margin}
           scale={yScale}
-          stroke={"#fff"}
-          tickStroke={"#fff"}
+          stroke={"#737373"}
+          tickStroke={"#737373"}
           tickFormat={(value) => `${value.valueOf().toFixed(2)}`}
           tickLabelProps={{
-            fill: "#fff",
-            color: "#fff",
+            fill: "#737373",
             fontSize: 11,
             textAnchor: "middle",
-            dx: 16,
+            dx: 18,
+            fontFamily: "inherit",
           }}
         />
         {tooltipData && (

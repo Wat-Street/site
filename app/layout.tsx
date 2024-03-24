@@ -29,6 +29,7 @@ const proxima = localFont({
       style: "normal",
     },
   ],
+  variable: "--font-proxima",
 })
 
 export const metadata: Metadata = {
