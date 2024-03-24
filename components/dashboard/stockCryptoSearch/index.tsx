@@ -15,6 +15,7 @@ interface ItemStockProps {
   ticker: string;
   name: string;
   primaryExchange: string;
+  setOpen: any;
 }
 
 interface ItemCryptoProps {
@@ -108,6 +109,7 @@ export default function StockCryptoSearch({
 
   }
 
+
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
       <div className="pt-3 px-3 space-x-2 flex">
@@ -140,7 +142,7 @@ export default function StockCryptoSearch({
           {isStock 
           ? 
           topFiveStockResults.map((result, index) => (
-            <StockItem key={index} ticker={result.ticker} name={result.name} primaryExchange={result.primaryExchange}/>
+            <StockItem key={index} ticker={result.ticker} name={result.name} primaryExchange={result.primaryExchange} setOpen={setOpen}/>
           )) 
           : 
           topFiveCryptoResults.map((result, index) => (
@@ -163,9 +165,17 @@ export default function StockCryptoSearch({
 
 
 
-const StockItem: React.FC<ItemStockProps> = ({ ticker, name, primaryExchange }) => {
+const StockItem: React.FC<ItemStockProps> = ({ ticker, name, primaryExchange, setOpen }) => {
+
+  const handleChoice = (ticker: string) => {
+    console.log(ticker);
+    setOpen(false);
+  }
+
   return (
-    <button className="relative w-full flex justify-between cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring">
+    <button className="relative w-full flex justify-between cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring"
+            onClick={() => handleChoice(ticker)}
+    >
       <div className="font-semibold">
         {ticker}{" "}
         <span className="text-muted-foreground font-normal inline-block ml-1">
