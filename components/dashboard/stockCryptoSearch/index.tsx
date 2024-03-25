@@ -49,9 +49,12 @@ export default function StockCryptoSearch({
 
   const [search, setSearch] = useState("")
 
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       if (search) {
+        setLoading(true)
         console.log("searching for: " + search)
         handleSearch();
       } else {
@@ -85,6 +88,7 @@ export default function StockCryptoSearch({
           primaryExchange: result.primary_exchange,
         }));
 
+        setLoading(false)
         setTopFiveStockResults(topMatches);
 
       } catch (error) {
@@ -105,6 +109,7 @@ export default function StockCryptoSearch({
           currencySymbol: result.currency_symbol,
         }))
 
+        setLoading(false)
         setTopFiveCryptopResults(topMatches);
 
       } catch (error) {
@@ -143,21 +148,26 @@ export default function StockCryptoSearch({
       />
       <CommandList>
         <div className="overflow-hidden p-2 text-foreground">
+          {loading
+            ? (<div className="flex w-full justify-center text-muted-foreground items-center text-sm py-2">
+                  <Loader2 className="animate-spin h-4 w-4 mr-2 text-brand" />{" "}
+                  Searching...
+               </div>)
 
-          {isStock 
-          ? 
-          topFiveStockResults.map((result, index) => (
-            <StockItem key={index} ticker={result.ticker} name={result.name} primaryExchange={result.primaryExchange} setOpen={setOpen} setSelectedItem={setSelectedItem}/>
-          )) 
-          : 
-          topFiveCryptoResults.map((result, index) => (
-            <CryptoItem key={index} ticker={result.ticker} name={result.name} currencySymbol={result.currencySymbol} setOpen={setOpen} setSelectedItem={setSelectedItem}/>
-          ))}
+            : isStock 
+            ? topFiveStockResults.map((result, index) => (
+              <StockItem key={index} ticker={result.ticker} name={result.name} primaryExchange={result.primaryExchange} setOpen={setOpen} setSelectedItem={setSelectedItem}/>
+              )) 
 
-          {/* <div className="flex w-full justify-center text-muted-foreground items-center text-sm py-2">
-            <Loader2 className="animate-spin h-4 w-4 mr-2 text-brand" />{" "}
-            Searching...
-          </div> */}
+            : !isStock
+            ? topFiveCryptoResults.map((result, index) => (
+              <CryptoItem key={index} ticker={result.ticker} name={result.name} currencySymbol={result.currencySymbol} setOpen={setOpen} setSelectedItem={setSelectedItem}/>
+              ))
+
+            : <p> search failed </p>
+          }
+
+          
 
           {/* <div className="flex w-full justify-center text-muted-foreground items-center text-sm py-2">
             <X className="h-4 w-4 mr-2 text-brand" /> No items found.
