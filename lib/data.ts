@@ -18,7 +18,7 @@ export const execs = [
     },
     {
         name: "Jai Betala",
-        role: "VP of Outreach & Research",
+        role: "Co-Founder + VP of Outreach & Research",
         image: jai,
         alt: "Placeholder",
     },
