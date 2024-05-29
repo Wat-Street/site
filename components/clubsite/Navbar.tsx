@@ -16,7 +16,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <div className="rounded-xl bg-black/20 backdrop-blur-md backdrop-brightness-75 ring-1 ring-neutral-800">
+            <div className="rounded-xl bg-black/10 backdrop-blur-md backdrop-brightness-75 border border-1 border-neutral-800">
                 <ul className="flex gap-1 px-1 py-1">
                     {navLinks.map((item, key) => (
                         <a href={item.href} onClick={() => onClick(item, key)}>

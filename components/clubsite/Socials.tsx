@@ -3,7 +3,7 @@ import { Linkedin, Mail } from "lucide-react";
 const Socials = () => {
     return (
         <div>
-            <ul className="flex gap-6 sm:gap-10 px-1 py-1 text-neutral-200">
+            <ul className="flex gap-6 sm:gap-10 px-1 py-1 text-neutral-200 justify-items-end">
                 <li>
                     <a
                         href="https://instagram.com/wat.street/"

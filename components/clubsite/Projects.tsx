@@ -13,6 +13,9 @@ import { projects } from "@/lib/data";
 const Projects = () => {
     return (
         <div className="my-auto projCards">
+            <div className="sm:hidden text-4xl font-bold mb-4 text-neutral-50">
+                Projects
+            </div>
             <div className="sm:hidden flex flex-col gap-4">
                 {projects.map((project) => (
                     <div className="projCard w-full h-96 rounded-lg bg-neutral-800 overflow-hidden">

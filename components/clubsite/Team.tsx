@@ -11,6 +11,9 @@ import whitehorse from "@/assets/logos/whitehorse.png";
 const Team = () => {
     return (
         <div>
+            <div className="sm:hidden text-4xl font-bold mb-4 text-neutral-50">
+                Team
+            </div>
             <div className="memberCards">
                 <div className="flex flex-wrap justify-center gap-x-3 gap-y-[6px]">
                     {execs.map((exec) => (
