@@ -14,11 +14,16 @@ const About = () => {
             </div> */}
             <div className="relative">
                 {/* <Paragraph paragraph={paragraph} /> */}
-                <div className="text-4xl text-white/30 font-semibold text-wrap">
+                <div className="text-3xl sm:text-4xl text-white/30 font-semibold text-wrap">
                     {paragraph}
                 </div>
-                <div className="absolute top-0 left-0 font-semibold text-4xl text-neutral-50">
-                    <Word paragraph={paragraph} end={"start 0.36"} />
+                <div className=" font-semibold text-neutral-50">
+                    <div className="absolute top-0 text-4xl left-0 invisible sm:visible">
+                        <Word paragraph={paragraph} end={"start 0.36"} />
+                    </div>
+                    <div className="absolute top-0 left-0 visible sm:invisible text-3xl">
+                        <Word paragraph={paragraph} end={"start 0.21"} />
+                    </div>
                 </div>
             </div>
         </div>

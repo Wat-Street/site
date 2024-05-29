@@ -1,4 +1,4 @@
-import placeholder from "@/assets/images/puppy.jpg";
+//pfps
 import jaimil from "@/assets/images/jaimil.jpg";
 import jai from "@/assets/images/jai.jpg";
 import joseph from "@/assets/images/joseph.jpg";
@@ -7,7 +7,14 @@ import thomas from "@/assets/images/thomas.jpg";
 import hugh from "@/assets/images/hugh.jpg";
 import ishaan from "@/assets/images/ishaan.jpg";
 import akshar from "@/assets/images/akshar.jpg";
-import gurik from "@/assets/images/gurik.jpg";
+
+//projgraphics
+import mean from "@/assets/graphics/Mean Reversion.svg";
+import sentiment from "@/assets/graphics/Sentiment Analysis.svg";
+import crypto from "@/assets/graphics/Crypto Arbitrage.svg";
+import llm from "@/assets/graphics/LLM.svg";
+import backtesting from "@/assets/graphics/backtesting.png";
+import ml from "@/assets/graphics/ml.svg";
 
 export const execs = [
     {
@@ -79,4 +86,43 @@ export const team = [
     { name: "Reshi Adavan", team: "Quant" },
     { name: "Sheldon Lewis", team: "Quant" },
     { name: "Sourish Das", team: "Quant" },
+] as const;
+
+export const projects = [
+    {
+        name: "Mean Reversion",
+        description:
+            "Using fluctuations in the price of a stock to generate profits over time.",
+        image: mean,
+    },
+    {
+        name: "Sentiment Analysis",
+        description:
+            "Using fluctuations in the price of a stock to generate profits over time.",
+        image: sentiment,
+    },
+    {
+        name: "Crypto Arbitrage",
+        description:
+            "Analyzing opportunities for arbitrage across various exchanges.",
+        image: crypto,
+    },
+    {
+        name: "LLM Research",
+        description:
+            "In-house LLM to assist quant devs with training models, research, etc.",
+        image: llm,
+    },
+    {
+        name: "Backtesting Platform",
+        description:
+            "A way to test our models on the market and assess performance.",
+        image: backtesting,
+    },
+    {
+        name: "ML Platform",
+        description:
+            "A place for devs to securely utilize hardware to train models for free!",
+        image: ml,
+    },
 ] as const;

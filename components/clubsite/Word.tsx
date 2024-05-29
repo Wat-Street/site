@@ -12,12 +12,15 @@ const Paragraph = ({ paragraph, end }: { paragraph: string; end: any }) => {
     const words = paragraph.split(" ");
 
     return (
-        <div ref={container} className="flex flex-wrap w-[101%]">
+        <div
+            ref={container}
+            className="flex flex-wrap w-[100%] gap-x-[0.255em]"
+        >
             {words.map((word, i) => {
                 const start = i / words.length;
                 const end = start + 1 / words.length;
                 return (
-                    <div className="mr-[0.255em]">
+                    <div className="">
                         <Word
                             key={i}
                             progress={scrollYProgress}

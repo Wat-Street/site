@@ -8,15 +8,15 @@ import MousePos from "@/components/clubsite/MousePos";
 
 export default function HomePage() {
     return (
-        <main>
+        <main className="mx-6 sm:mx-0">
             <Header />
-            <div className="max-w-4xl mx-auto mt-24">
-                <div>
+            <div className="max-w-4xl mx-auto">
+                <div className="h-[calc(100vh-80px)]">
                     <Landing />
                 </div>
                 <section
                     id="about"
-                    className="mt-[325px] flex flex-col h-screen"
+                    className="-mt-36 sm:-mt-16 flex flex-col h-screen"
                 >
                     <About />
                 </section>
@@ -24,13 +24,16 @@ export default function HomePage() {
             <div className="max-w-5xl mx-auto">
                 <section
                     id="projects"
-                    className="-mt-[150px] flex flex-col h-screen"
+                    className="sm:-mt-[150px] flex flex-col sm:h-screen"
                 >
                     <Projects />
                 </section>
             </div>
             <div className="max-w-5xl mx-auto">
-                <section id="team" className="scroll-m-[120px]">
+                <section
+                    id="team"
+                    className="mt-20 sm:mt-0 sm:scroll-m-[120px]    "
+                >
                     <Team />
                 </section>
             </div>

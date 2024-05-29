@@ -93,16 +93,24 @@ body {
     }
 }
 
-.teamPic {
-    filter: grayscale(25%);
-    transition: filter 0.2s;
-    transition-timing-function: ease-in-out;
-    opacity: 30%;
+@media all and (min-width: 0px) and (max-width: 639px) {
+    .teamPic {
+        opacity: 40%;
+    }
 }
 
-.execCard:hover .teamPic {
-    filter: grayscale(0%);
-    opacity: 50%;
+@media all and (min-width: 640px) {
+    .teamPic {
+        filter: grayscale(25%);
+        transition: filter 0.2s;
+        transition-timing-function: ease-in-out;
+        opacity: 30%;
+    }
+
+    .execCard:hover .teamPic {
+        filter: grayscale(0%);
+        opacity: 50%;
+    }
 }
 
 .memberCard {

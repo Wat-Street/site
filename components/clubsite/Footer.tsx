@@ -7,31 +7,18 @@ import { Linkedin, Mail } from "lucide-react";
 
 const Footer = () => {
     return (
-        // <div className="mt-36 min-w-full min-h-20 px-20 bg-neutral-950/0 border-t border-neutral-800 grid grid-cols-3">
-        //     <div className="my-auto">
-        //         <Image
-        //             src={logo}
-        //             alt="logo"
-        //             className="w-14 h-14 justify-self-start"
-        //         />
-        //     </div>
-        //     <div className="my-auto justify-self-center">
-        //         <Socials />
-        //     </div>
-        //     <div className="my-auto justify-self-end text-neutral-200">
-        //         © WatStreet 2024
-        //     </div>
-        // </div>
-        <div className="grid grid-cols-3 mt-20 mi-w-full min-h-20 px-20 border-t border-neutral-800 items-center py-6">
-            <div className="flex flex-col mt-3">
-                <div className="text-neutral-300 text-sm">Sponsored by:</div>
+        <div className="grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 mt-20 min-w-full min-h-20 sm:px-20 border-t border-neutral-800 sm:items-center pt-6 sm:py-6">
+            <div className="flex flex-col sm:mt-3 mx-auto">
+                <div className="text-center sm:text-left text-neutral-300 text-sm">
+                    Sponsored by:
+                </div>
                 <Image
                     src={mef}
                     alt="logo"
-                    className="aspect-[500/258] w-56 -ml-4 -mt-2 brightness-150"
+                    className="aspect-[500/258] w-56 sm:-ml-4 -mt-2 brightness-150"
                 />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col order-last sm:order-2 -mt-16 sm:mt-0">
                 <Image
                     src={logo}
                     alt="logo"
@@ -41,7 +28,7 @@ const Footer = () => {
                     © 2024 Wat Street
                 </div>
             </div>
-            <div className="justify-self-end">
+            <div className="justify-self-center sm:justify-self-end order-3">
                 <Socials />
             </div>
         </div>
