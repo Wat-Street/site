@@ -5,7 +5,7 @@ const paragraph =
     "Wat Street is a design team at the University of Waterloo striving to provide a comprehensive education in financial investment strategies and algorithm development. Our goal is to create a space where students can learn the fundamentals of quantitative analysis and how to apply them in the real world.";
 const About = () => {
     return (
-        <div className="my-auto">
+        <div className="sm:my-auto">
             {/* <div className="text-5xl font-bold mb-5 relative text-white/30">
                 Who we are
                 <div className="absolute top-0 left-0 text-white">

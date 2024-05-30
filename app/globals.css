@@ -124,7 +124,7 @@ body {
 .memberCard::before {
     background: radial-gradient(
         600px circle at var(--mouse-x) var(--mouse-y),
-        rgba(255, 255, 255, 0.16) 0%,
+        rgba(255, 187, 15, 0.1) 0%,
         rgba(0, 0, 0, 0) 30%
     );
     content: "";
@@ -144,7 +144,7 @@ body {
 .memberCard .memberCardBorder {
     background: radial-gradient(
         600px circle at var(--mouse-x) var(--mouse-y),
-        rgba(255, 255, 255, 0.26) 0%,
+        rgba(255, 187, 15, 0.259) 0%,
         rgba(0, 0, 0, 0) 50%
     );
     content: "";
@@ -181,7 +181,7 @@ body {
 .projCard::before {
     background: radial-gradient(
         800px circle at var(--mouse-x) var(--mouse-y),
-        rgba(255, 255, 255, 0.14) 0%,
+        rgba(255, 187, 15, 0.1) 0%,
         rgba(0, 0, 0, 0) 30%
     );
     content: "";
@@ -201,7 +201,7 @@ body {
 .projCard .projCardBorder {
     background: radial-gradient(
         1000px circle at var(--mouse-x) var(--mouse-y),
-        rgba(255, 255, 255, 0.26) 0%,
+        rgba(255, 187, 15, 0.26) 0%,
         rgba(0, 0, 0, 0) 50%
     );
     content: "";

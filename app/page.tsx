@@ -16,7 +16,7 @@ export default function HomePage() {
                 </div>
                 <section
                     id="about"
-                    className="-mt-36 sm:-mt-16 flex flex-col h-screen"
+                    className="sm:-mt-16 flex flex-col sm:h-screen"
                 >
                     <About />
                 </section>
@@ -24,7 +24,7 @@ export default function HomePage() {
             <div className="max-w-5xl mx-auto">
                 <section
                     id="projects"
-                    className="sm:-mt-[150px] flex flex-col sm:h-screen"
+                    className="mt-20 sm:-mt-[150px] flex flex-col sm:h-screen"
                 >
                     <Projects />
                 </section>
