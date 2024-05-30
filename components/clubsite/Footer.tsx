@@ -8,7 +8,7 @@ import { Linkedin, Mail } from "lucide-react";
 const Footer = () => {
     return (
         <div>
-            <div className="flex flex-wrap sm:flex-nowrap mt-16 sm:mt-20 min-h-20 sm:px-20 border-t border-neutral-800 pt-6 sm:py-6 justify-between">
+            <div className="flex flex-wrap sm:flex-nowrap mt-16 sm:mt-20 min-h-20 sm:px-20 border-t border-neutral-800 pt-6 sm:py-6 justify-around">
                 <div className="w-1/2 sm:w-auto flex flex-col sm:mt-3">
                     <div className="text-left text-neutral-300 text-sm">
                         Sponsored by:
@@ -16,7 +16,7 @@ const Footer = () => {
                     <Image
                         src={mef}
                         alt="logo"
-                        className="aspect-[500/258] w-36 sm:w-56 -ml-4 -mt-2 brightness-150"
+                        className="aspect-[500/258] w-36 sm:w-56 -ml-3 -mt-2 brightness-150"
                     />
                 </div>
                 <div className=" order-3 my-auto ">

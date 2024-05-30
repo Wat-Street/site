@@ -24,7 +24,7 @@ const Projects = () => {
                             <Image
                                 src={project.image}
                                 alt={project.name}
-                                className="px-2 mt-10 w-max h-max"
+                                className="px-2 mt-4 sm:mt-10 w-max h-max"
                             />
                             <div className="mx-8 mb-6 flex flex-col gap-1 absolute bottom-0">
                                 <div className="text-2xl font-semibold text-neutral-50">
