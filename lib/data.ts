@@ -64,7 +64,7 @@ export const leads = [
     },
     {
         name: "Akshar Barot",
-        role: "UI/UX Lead",
+        role: "Frontend Lead",
         image: akshar,
         alt: "Placeholder",
     },

@@ -26,7 +26,7 @@ const Footer = () => {
                     <Image
                         src={logo}
                         alt="logo"
-                        className="w-24 h-24 sm:w-32 sm:h-32 mx-auto drop-shadow-[0_0px_40px_rgba(251,228,159,0.7)]"
+                        className="w-24 h-24 sm:w-32 sm:h-32 mx-auto drop-shadow-[0_0px_40px_rgba(251,228,159,0.7)] overflow-visible"
                     />
                     <div className="text-neutral-300 text-center text-sm">
                         © 2024 Wat Street
