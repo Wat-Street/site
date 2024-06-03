@@ -8,7 +8,7 @@ import { Linkedin, Mail } from "lucide-react";
 const Footer = () => {
     return (
         <div>
-            <div className="flex flex-wrap sm:flex-nowrap mt-16 sm:mt-20 min-h-20 sm:px-20 border-t border-neutral-800 pt-6 sm:py-6 justify-around">
+            <div className="flex flex-wrap sm:flex-nowrap mt-16 sm:mt-20 min-h-20 sm:px-20 border-t border-neutral-800 pt-6 sm:py-6 justify-around sm:justify-between">
                 <div className="w-1/2 sm:w-auto flex flex-col sm:mt-3">
                     <div className="text-left text-neutral-300 text-sm">
                         Sponsored by:
@@ -22,11 +22,11 @@ const Footer = () => {
                 <div className=" order-3 my-auto ">
                     <Socials />
                 </div>
-                <div className="flex flex-col order-last mt-4 sm:order-2 sm:mt-0 mx-auto sm:absolute inset-x-0 -translate-y-3">
+                <div className="flex flex-col order-last mt-4 sm:order-2 sm:mt-0 mx-auto sm:absolute inset-x-0 -translate-y-3 -z-10">
                     <Image
                         src={logo}
                         alt="logo"
-                        className="w-24 h-24 sm:w-32 sm:h-32 mx-auto drop-shadow-[0_0px_40px_rgba(251,228,159,0.7)] overflow-visible"
+                        className="w-24 h-24 sm:w-32 sm:h-32 mx-auto drop-shadow-[0_0px_40px_rgba(251,228,159,0.7)]"
                     />
                     <div className="text-neutral-300 text-center text-sm">
                         © 2024 Wat Street
