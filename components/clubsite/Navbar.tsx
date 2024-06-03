@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const navLinks = [
     { name: "About", href: "#about" },
@@ -13,6 +13,30 @@ const Navbar = () => {
     const onClick = (item: any, key: any) => {
         setVisibleKey(key);
     };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            let scrollPosition = window.scrollY;
+            const sections = document.querySelectorAll("section");
+
+            if (sections[0].offsetTop > scrollPosition) setVisibleKey(-1);
+
+            sections.forEach((section, index) => {
+                if (
+                    section.offsetTop <= scrollPosition + 100 &&
+                    section.offsetTop + section.offsetHeight >
+                        scrollPosition + 100
+                ) {
+                    setVisibleKey(index);
+                }
+            });
+        };
+
+        const sections = document.querySelectorAll("section");
+        if (sections) {
+            window.addEventListener("scroll", handleScroll);
+        }
+    }, [visibleKey]);
 
     return (
         <div>
