@@ -1,6 +1,12 @@
 # Wat Street
 
-## Run Localy
+## Set up environment variables
+
+```env
+NEXT_PUBLIC_POLYGON_API_KEY=<your-polygon-api-key>
+```
+
+## Run Locally
 
 ```bash
 npm install
