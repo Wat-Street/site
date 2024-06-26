@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        proxima: ["var(--font-proxima)"],
+      },
       colors: {
         brand: "#ffbb0f",
         border: "hsl(var(--border))",

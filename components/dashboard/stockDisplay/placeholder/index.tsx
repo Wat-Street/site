@@ -1,15 +1,18 @@
 "use client"
 
-import { Card } from "@/components/ui/card"
-import PlaceholderGraph, { PlaceholderGraphLine } from "./placeholder"
-import { useState } from "react"
 import { Loader2 } from "lucide-react"
+import PlaceholderGraphLine from "./line"
+import PlaceholderGraph from "./graph"
 
-export default function GraphCard() {
-  const [isLoading, setIsLoading] = useState(true)
-
+export default function PlaceholderGraphic({
+  isLoading,
+}: {
+  isLoading: boolean
+}) {
   return (
-    <Card className="2xl:col-span-3 overflow-hidden col-span-2 row-span-2 w-full h-full relative z-0 flex items-center justify-center">
+    <>
+      <div className="absolute z-10 bg-gradient-to-l from-background to-transparent h-full w-16 sm:w-32 md:w-48 right-0" />
+      <div className="absolute z-10 bg-gradient-to-r from-background to-transparent h-full w-16 sm:w-32 md:w-48 left-0" />
       <div className="absolute flex items-center text-lg z-10 select-none font-semibold">
         {isLoading ? (
           <>
@@ -23,11 +26,10 @@ export default function GraphCard() {
       {isLoading ? (
         <>
           <PlaceholderGraphLine blur />
-          <PlaceholderGraphLine blur />
           <PlaceholderGraphLine />
         </>
       ) : null}
       <PlaceholderGraph />
-    </Card>
+    </>
   )
 }

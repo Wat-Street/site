@@ -78,3 +78,7 @@ html, body {
       stroke-dashoffset: 2000;
   }
 }
+
+.proxima {
+  font-family: var(--font-proxima);
+}
