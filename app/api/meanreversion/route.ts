@@ -9,6 +9,17 @@ const schema = z.object({
   maxholding: z.string(),
 });
 
+// ===== EXAMPLE REQUEST =====
+
+// {
+//   "ticker": "AAPL",
+//   "trainstart": "2015-01-01",
+//   "trainend": "2022-01-01",
+//   "teststart": "2022-01-01",
+//   "testend": "2024-05-06",
+//   "maxholding": 100
+// }
+
 export async function POST(request: Request) {
   const body = await request.json();
   let parsed;
@@ -31,6 +42,8 @@ export async function POST(request: Request) {
       }
     );
     const data = await res.json();
+
+    // ===== EXAMPLE RESPONSE =====
 
     // const data = [
     //   {
