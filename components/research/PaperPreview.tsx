@@ -11,7 +11,7 @@ const PaperPreview = (props: {
     return (
         <div>
             <a href={`/research/${props.slug}`} className="hidden md:block">
-                <div className="h-52 md:h-[245px] w-full rounded-md p-4 border border-1 border-[#2c2d2d] relative group hover:bg-[#ffbb0f]/10 hover:border-[#ffbb0f]/25 transition ease-in-out duration-300">
+                <div className="md:h-[245px] w-full rounded-md p-4 border border-1 border-[#2c2d2d] relative group hover:bg-[#ffbb0f]/10 hover:border-[#ffbb0f]/25 transition ease-in-out duration-300">
                     <div className="text-pretty">
                         <div className="text-xl font-bold text-neutral-50">
                             {props.title}
