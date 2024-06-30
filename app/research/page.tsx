@@ -36,7 +36,7 @@ export default function HomePage() {
             <Header defaultPage={3} />
             <div className="pt-4 md:pt-8 pb-6 mx-6 min-h-[calc(100vh-80px)]">
                 <div className="min-h-8 py-4 flex flex-wrap justify-center gap-1 text-sm text-neutral-50">
-                    <div
+                    <button
                         onClick={() => {
                             setAllActive(true);
                             setActiveTags([]);
@@ -45,9 +45,9 @@ export default function HomePage() {
                         px-4 py-2 border border-1 border-[#2c2d2d] rounded-md hover:bg-[#2c2d2d] transition ease-in-out duration-200`}
                     >
                         All
-                    </div>
+                    </button>
                     {tags.map((tag, key) => (
-                        <div
+                        <button
                             onClick={() => handleTagClick(tag.name)}
                             className={`${
                                 activeTags.includes(tag.name)
@@ -57,7 +57,7 @@ export default function HomePage() {
                                 px-4 py-2 border border-1 border-[#2c2d2d] rounded-md hover:bg-[#2c2d2d] transition ease-in-out duration-200`}
                         >
                             {tag.name}
-                        </div>
+                        </button>
                     ))}
                 </div>
                 <ScrollArea className="h-[72vh]">
