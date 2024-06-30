@@ -78,7 +78,6 @@ const Projects = () => {
                 <a
                     href="/research"
                     className="inline-flex items-center font-semibold bold leading-tight text-neutral-200 group mt-6"
-                    target="_blank"
                     rel="noreferrer noopener"
                 >
                     <span className="text-xl border-b-[1px] border-transparent transition group-hover:border-[#ffbb0f]/35">
