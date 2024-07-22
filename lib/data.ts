@@ -4,7 +4,7 @@ import jai from "@/assets/images/jai.jpg";
 import joseph from "@/assets/images/joseph.jpg";
 import ishaan from "@/assets/images/ishaan.jpg";
 import akshar from "@/assets/images/akshar.jpg";
-import krish from "@assets/images/krish.jpg";
+import krish from "@/assets/images/krish.jpg";
 //projgraphics
 import mean from "@/assets/graphics/Mean Reversion.svg";
 import sentiment from "@/assets/graphics/Sentiment Analysis.svg";
