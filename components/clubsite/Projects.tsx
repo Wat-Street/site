@@ -74,7 +74,32 @@ const Projects = () => {
                     <CarouselNext />
                 </Carousel>
             </div>
-            {/* <div className="sm:hidden w-full">
+            <div>
+                <a
+                    href="/research"
+                    className="inline-flex items-center font-semibold bold leading-tight text-neutral-200 group mt-6"
+                    rel="noreferrer noopener"
+                >
+                    <span className="text-xl border-b-[1px] border-transparent transition group-hover:border-[#ffbb0f]/35">
+                        Click here to see our research
+                    </span>
+                    <span className="ml-4 group-hover:translate-x-2 group-hover:text-[#ffbb0f]/50 ease-in-out duration-200">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            className="h-5 w-5"
+                            viewBox="0 0 16 16"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
+                            />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+            <div>
+                {/* <div className="sm:hidden w-full">
                 <div className="projCard w-full h-96 rounded-lg bg-neutral-800 overflow-hidden">
                     <div className="projCardBorder"></div>
                     <div className="projCardContent w-[calc(100%-2px)] h-[calc(100%-2px)] m-[1px] bg-black rounded-lg relative overflow-hidden">
@@ -1101,6 +1126,7 @@ const Projects = () => {
                     </div>
                 </div>
             </div> */}
+            </div>
         </div>
     );
 };

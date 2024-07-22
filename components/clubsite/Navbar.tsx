@@ -2,14 +2,16 @@
 import React, { useEffect, useState } from "react";
 
 const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Team", href: "#team" },
+    { name: "About", href: "/#about" },
+    { name: "Projects", href: "/#projects" },
+    { name: "Team", href: "/#team" },
+    { name: "Research", href: "/research" },
     // { name: "Contact", href: "#contact" },
 ];
 
-const Navbar = () => {
-    const [visibleKey, setVisibleKey] = useState(-1);
+const Navbar = (props: { defaultPage: number }) => {
+    const [visibleKey, setVisibleKey] = useState(props.defaultPage);
+
     const onClick = (item: any, key: any) => {
         setVisibleKey(key);
     };
@@ -33,7 +35,7 @@ const Navbar = () => {
         };
 
         const sections = document.querySelectorAll("section");
-        if (sections) {
+        if (sections.length > 0) {
             window.addEventListener("scroll", handleScroll);
         }
     }, [visibleKey]);
